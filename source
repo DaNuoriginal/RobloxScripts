@@ -1,0 +1,44 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local TeleportService = game:GetService("TeleportService")
+local Window = Library.CreateLib("Improved Pets Go Sniper", "DarkTheme")
+
+local Tab = Window:NewTab("Sniper")
+local Section = Tab:NewSection("Sniper Configuration")
+
+local iconGui = Instance.new("ScreenGui")
+iconGui.Parent = game.CoreGui
+iconGui.Name = "SniperToggleUI"
+
+local iconButton = Instance.new("ImageButton")
+iconButton.Size = UDim2.new(0, 70, 0, 70)
+iconButton.Position = UDim2.new(0.05, 0, 0.05, 0)
+iconButton.Image = "rbxassetid://6031075938"
+iconButton.BackgroundTransparency = 1
+iconButton.Parent = iconGui
+iconButton.Draggable = true
+
+local isUIVisible = true
+
+iconButton.MouseButton1Click:Connect(function()
+    isUIVisible = not isUIVisible
+    Window:Toggle(isUIVisible)
+end)
+
+Section:NewLabel("💎 Set your total gem budget for purchases:")
+Section:NewTextBox("Enter your budget (e.g., 1000 gems)", "Budget", function(value)
+    getgenv().savedSettings.budget = tonumber(value) or 0
+end)
+
+Section:NewButton("Save Settings", "Saves sniper settings", function()
+    print("Settings saved!")
+end)
+
+Section:NewButton("Start Sniping", "Starts the sniper!", function()
+    print("Sniper Started!")
+end)
+
+Section:NewButton("Stop Sniping", "Stops the sniper!", function()
+    print("Sniper Stopped!")
+end)
